@@ -65,17 +65,17 @@ sol = solve_ivp(system, t_span, y0, method='RK45', t_eval=t_eval)
 
 
 v_beam = -alpha*l*(np.cos(sol.y[0])*sol.y[1] + np.cos(sol.y[2])*sol.y[3])
-E_beam = 1/2*M*(v_beam)**2
+K_beam = 1/2*M*(v_beam)**2
 
-Ek_pend1 = 1/2*m*((sol.y[1]*np.cos(sol.y[0])+ v_beam)**2+(sol.y[1]*np.sin(sol.y[0]))**2)
-Ep_pend1 = l*(1-np.cos(sol.y[0]))*m*abs(g)
-E_tot1 = Ek_pend1 + Ep_pend1
+K_pend1 = 1/2*m*((sol.y[1]*np.cos(sol.y[0])+ v_beam)**2+(sol.y[1]*np.sin(sol.y[0]))**2)
+V_pend1 = l*(1-np.cos(sol.y[0]))*m*abs(g)
+E_tot1 = K_pend1 + V_pend1
 
-Ek_pend2 = 1/2*m*((sol.y[3]*np.cos(sol.y[2])+ v_beam)**2+(sol.y[3]*np.sin(sol.y[2]))**2)
-Ep_pend2 = l*(1-np.cos(sol.y[2]))*m*abs(g)
-E_tot2 = Ek_pend2 + Ep_pend2
+K_pend2 = 1/2*m*((sol.y[3]*np.cos(sol.y[2])+ v_beam)**2+(sol.y[3]*np.sin(sol.y[2]))**2)
+V_pend2 = l*(1-np.cos(sol.y[2]))*m*abs(g)
+E_tot2 = K_pend2 + V_pend2
 
-E_tot = E_beam + E_tot1 + E_tot2
+E_tot = K_beam + E_tot1 + E_tot2
 
 plt.figure()
 plt.plot(sol.t, E_tot)
